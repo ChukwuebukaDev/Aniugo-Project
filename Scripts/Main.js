@@ -1,29 +1,4 @@
-const products = [{
-    name: "2022 Mercedes Benz mobile actuator",
-    image:"./assets/abs3.jpg",
-    priceCents:860222,
-    rating: {
-        stars:4.5,
-        count: 87
-    }
-},{
-    name: "Size 15 70s Master Brake pump actuator",
-    image:"./assets/abs5.jpg",
-    priceCents:750000,
-    rating: {
-        stars:4,
-        count: 127
-    }
-},{
-    name: "Toyota Land Cruiser Abs",
-    image:"./assets/abs4.webp",
-    priceCents:567493,
-    rating: {
-        stars:4.5,
-        count: 56
-    }
-}];
-
+import products from '../data/products.js';
 let productRendering = '';
 products.forEach((product) => {
     productRendering += `
