@@ -26,7 +26,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class="select-quantity-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -42,7 +42,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart added-logo-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -57,6 +57,8 @@ document.querySelector('.product-inject').innerHTML = productRendering;
 document.querySelectorAll('.add-btn').forEach((button)=>{
     button.addEventListener('click',(e)=>{
         const productId = e.target.dataset.productId;
+        const selectQuantity = document.querySelector(`.select-quantity-${productId}`);
+        const addedLogo = document.querySelector(`.added-logo-${productId}`);
         let matchingItem;
         cart.forEach((item) => {
             if(productId === item.productId){
@@ -64,14 +66,27 @@ document.querySelectorAll('.add-btn').forEach((button)=>{
             }
         });
         if(matchingItem){
-            matchingItem.quantity += 1;
+        matchingItem.quantity += +selectQuantity.value
+        ;
         }
         else{
         cart.push({
             productId,
-            quantity:1
+            quantity:+selectQuantity.value
         });
-    }
+    };
+
+        const timer_for_logo = () => {
+        addedLogo.classList.add('addedLogo');
+        let logoTimer = setTimeout(()=>{
+            addedLogo.classList.remove('addedLogo');
+        },2000);
+
+        return () => logoTimer;
+        };
+   
+     clearTimeout(timer_for_logo());
+
         let cartQuantity = 0;
         cart.forEach((item)=>{
             cartQuantity += item.quantity;
