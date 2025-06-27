@@ -1,5 +1,6 @@
 import products from '../data/products.js';
-import cart from '../data/cart.js';
+import {cart,addToCart,updateCartQuanity} from '../data/cart.js';
+
 let productRendering = '';
 products.forEach((product) => {
     productRendering += `
@@ -59,39 +60,21 @@ document.querySelectorAll('.add-btn').forEach((button)=>{
         const productId = e.target.dataset.productId;
         const selectQuantity = document.querySelector(`.select-quantity-${productId}`);
         const addedLogo = document.querySelector(`.added-logo-${productId}`);
-        let matchingItem;
-        cart.forEach((item) => {
-            if(productId === item.productId){
-                matchingItem = item;
-            }
-        });
-        if(matchingItem){
-        matchingItem.quantity += +selectQuantity.value
-        ;
-        }
-        else{
-        cart.push({
-            productId,
-            quantity:+selectQuantity.value
-        });
-    };
 
+        addToCart(productId,selectQuantity);
+
+        console.log(cart);
         const timer_for_logo = () => {
         addedLogo.classList.add('addedLogo');
         let logoTimer = setTimeout(()=>{
             addedLogo.classList.remove('addedLogo');
         },2000);
-
         return () => logoTimer;
         };
    
      clearTimeout(timer_for_logo());
-
-        let cartQuantity = 0;
-        cart.forEach((item)=>{
-            cartQuantity += item.quantity;
-        })
-        document.querySelector('.cart-quantity').textContent = cartQuantity;
+     //The updateCartQuantity function updates the cart quantity in the cart
+     updateCartQuanity();
     })
 })
 
