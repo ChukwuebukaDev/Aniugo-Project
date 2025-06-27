@@ -1,4 +1,5 @@
 import products from '../data/products.js';
+import cart from '../data/cart.js';
 let productRendering = '';
 products.forEach((product) => {
     productRendering += `
@@ -46,10 +47,33 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary add-btn" data-product-id = "${product.id}">
             Add to Cart
           </button>
         </div>
     `;
 });
 document.querySelector('.product-inject').innerHTML = productRendering;
+document.querySelectorAll('.add-btn').forEach((button)=>{
+    button.addEventListener('click',(e)=>{
+        const productId = e.target.dataset.productId;
+        let matchingItem;
+        cart.forEach((item) => {
+            if(productId === item.productId){
+                matchingItem = item;
+            }
+        });
+        if(matchingItem){
+            matchingItem.quantity += 1;
+        }
+        else{
+        cart.push({
+            productId,
+            quantity:1
+        });
+    }
+        console.log(cart)
+        
+    })
+})
+
