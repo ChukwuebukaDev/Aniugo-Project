@@ -98,6 +98,12 @@ input, select, button {
   color: rgb(196, 80, 0);
 }
 
+.updateField{width: 30px;outline: none;}
+.saveUpdate,.updateField{display:none ;}
+.is-editing-quantity .updateField {
+  display: unset;
+}
+.is-editing-quantity .saveUpdate{display: unset;}
 /* Styles for dropdown selectors. */
 select {
   color: rgb(33, 33, 33);

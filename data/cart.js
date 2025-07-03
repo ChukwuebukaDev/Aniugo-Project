@@ -1,6 +1,6 @@
 export let cart = JSON.parse(localStorage.getItem('cart')) ?? [];
 
-const saveToStorage = () => {
+export const saveToStorage = () => {
 localStorage.setItem('cart',JSON.stringify(cart));
 }
 export const addToCart = (productId,selectQuantity) => {
@@ -22,15 +22,27 @@ let matchingItem;
     };
     saveToStorage();
 }
+export function updateQuantity(productId,newQuantity){
+    let matchingItem;
+    cart.forEach(item =>{
+        if(item.productId === productId){
+            matchingItem = item;
+        }
+    });
+   
+    matchingItem.quantity = newQuantity;
+    saveToStorage()
+}
 export const removeFromCart = (productId) => {
     const newCart = cart.filter(item => item.productId != productId );
     cart = newCart;
    saveToStorage()
 }
-export const updateCartQuanity = () => {
+
+export const updateCartQuanity = (view) => {
     let cartQuantity = 0;
     cart.forEach((item) => {
     cartQuantity += item.quantity;
     })
-    document.querySelector('.cart-quantity').textContent = cartQuantity;
+    view.textContent = cartQuantity || 'Empty';
 }

@@ -75,7 +75,7 @@ document.querySelectorAll('.add-btn').forEach((button)=>{
    
      clearTimeout(timer_for_logo());
      //The updateCartQuantity function updates the cart quantity in the cart
-     updateCartQuanity();
+     updateCartQuanity(document.querySelector('.cart-quantity'));
     })
 })
 
