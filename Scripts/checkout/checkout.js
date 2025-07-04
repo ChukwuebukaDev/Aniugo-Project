@@ -1,8 +1,9 @@
-import {cart,removeFromCart,updateCartQuanity,updateQuantity} from '../../data/cart.js';
+import { cart , removeFromCart , updateCartQuanity , updateQuantity , updateDeliveryOptions } from '../../data/cart.js';
 import products from '../../data/products.js';
 import  formatCurrency  from '../utils/moneyFormating.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
+function renderOrderSummary(){
 let checkout_rendering = '';
 cart.forEach((item) => {
 const productId = item.productId;
@@ -61,7 +62,7 @@ checkout_rendering += `
 `;
 });
 function deliveryOptionsHtml(matched,cartItem){
-  let html;
+  let html = '';
   deliveryOptions.forEach((options) => {
     
   const today = dayjs();
@@ -74,7 +75,10 @@ function deliveryOptionsHtml(matched,cartItem){
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                <div class="delivery-option">
+                <div class="delivery-option  deliveryUpdate"
+                data-delivery-option-id = ${options.id}
+     data-product-id = ${matched}
+                >
                   <input type="radio" ${isChecked ? 'checked' : ''}
                     class="delivery-option-input"
                     name="delivery-option-${matched}">
@@ -116,6 +120,7 @@ function updateCheckoutItems(){
   });
   });
   }
+  
 function saveUpdatedItems(){
  document.querySelectorAll('#saved').forEach((link) => {
     link.addEventListener('click',()=>{
@@ -125,7 +130,6 @@ function saveUpdatedItems(){
      const updateInput = document.querySelector(`.update-quantity-${productId}`);
      const newUpdate = document.querySelector(`.quantity-${productId}`);
  
-   
      newUpdate.textContent = +updateInput.value;
      updateQuantity(productId,+updateInput.value);
      displayItemValue()
@@ -146,7 +150,16 @@ function saveUpdatedItems(){
 }});
 })
   }
-renderCheckoutPage();
-displayItemValue();
-updateCheckoutItems();
-saveUpdatedItems();
+  renderCheckoutPage();
+  displayItemValue()
+  updateCheckoutItems()
+  saveUpdatedItems();
+document.querySelectorAll('.deliveryUpdate').forEach(options => {
+  options.addEventListener('click' , ()=>{
+    const { productId , deliveryOptionId } = options.dataset;
+    updateDeliveryOptions(productId,deliveryOptionId)
+    renderOrderSummary();
+  });
+});
+}
+renderOrderSummary()

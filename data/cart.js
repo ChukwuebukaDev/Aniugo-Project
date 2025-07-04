@@ -47,3 +47,13 @@ export const updateCartQuanity = (view) => {
     })
     view.textContent = cartQuantity || 'Empty';
 }
+export function updateDeliveryOptions (productId,deliveryOptionId){
+    let matchingItem;
+        cart.forEach((item) => {
+            if(productId === item.productId){
+                matchingItem = item;
+            }
+        });
+    matchingItem.deliveryOptionId = deliveryOptionId;
+    saveToStorage()
+}
