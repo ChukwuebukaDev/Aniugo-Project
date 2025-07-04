@@ -17,7 +17,8 @@ let matchingItem;
         else{
         cart.push({
             productId,
-            quantity:+selectQuantity.value
+            quantity:+selectQuantity.value,
+            deliveryOptionId:'1'
         });
     };
     saveToStorage();
