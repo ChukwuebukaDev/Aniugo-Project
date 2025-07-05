@@ -1,0 +1,110 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hello world</title>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+body{
+font-family:arial;
+}
+button{
+padding:10px;
+border:none;
+border-radius:30px;
+background-color:mediumblue;
+color:aliceblue;
+font-weight:bold;
+cursor:pointer;
+
+}
+.btnOne{
+background-color:#333;
+color:#fff;
+}
+.all{
+width:400px;
+max-width:500px;
+height:450px;
+margin:auto;
+display:flex;
+flex-direction:column;
+border:1px solid dodgerblue;
+border-radius:10px;
+}
+.view{
+height:50%;
+border-radius:10px 10px 0 0;
+background-color:dodgerblue;
+font-size:1.5rem;
+display:grid;
+place-content:center;
+outline:none;
+}
+.color-container {
+height:50%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.color-container div{
+height:50px;
+width:50px;
+border-radius:50%;
+cursor:pointer;
+}
+.green{background-color:green;}
+.red{background-color:red;}
+.blue{background-color:blue;}
+.gold{background-color:gold;}
+</style>
+</head>
+<body>
+<button>Subscribe</button>
+<form>
+<label>Amazon Shipping Calculator</label>
+
+<input required placeholder="Cost of order" id="ints"/>
+<button id="btns" type="submit">Calculate</button>
+</form>
+<div class="all">
+<section contenteditable id="view1" class="view">
+
+</section>
+<div class="color-container">
+<div class="green"></div>
+<div class="red"></div>
+<div class="blue"></div>
+<div class="gold"></div>
+</div>
+</div>
+<script>
+class Professor{
+name;
+teaches;
+age;
+constructor(names,ages,teach){
+this.name = names;
+this.age = ages;
+this.teaches = teach;
+}
+
+introduceSelf(){
+console.log(`hi, i'm professor of ${this.teaches},${this.name}, welcome to my class!!`)
+}
+}
+
+const chukwuebuka = new Professor('Ebuzu Aniugo',28,"Computer Science");
+
+const benjamin = new Professor('Benjamin Martin',34,"Psychology");
+benjamin.introduceSelf();
+chukwuebuka.introduceSelf();
+console.log(chukwuebuka.teaches + '\n' + benjamin.teaches)
+</script>
+</body>
+</html>
