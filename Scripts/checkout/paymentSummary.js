@@ -5,10 +5,11 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 export function renderPaymentSummary(){
     let productPrice = 0;
     let shippingPrice = 0;
+    let cartQuantity = 0;
     cart.forEach((item) => {
       const product =  getProduct(item.productId);
       productPrice += product.priceCents * item.quantity;
-      
+      cartQuantity += item.quantity;
       const deliveryOption = getDeliveryOption(item.deliveryOptionId)
       shippingPrice += deliveryOption.priceCents
     });
@@ -22,7 +23,7 @@ export function renderPaymentSummary(){
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${cartQuantity}):</div>
             <div class="payment-summary-money">₦${formatCurrency(productPrice)}</div>
           </div>
 

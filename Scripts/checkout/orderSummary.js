@@ -1,6 +1,6 @@
 import { cart , removeFromCart , updateCartQuanity , updateQuantity , updateDeliveryOptions } from '../../data/cart.js';
 import getProduct from '../../data/getProduct.js';
-import products from '../../data/products.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 import  formatCurrency  from '../utils/moneyFormating.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
@@ -95,7 +95,8 @@ document.querySelectorAll('.delete-quantity-link').forEach((link) => {
         removeFromCart(productId);
         const productContainer = document.querySelector(`.cart-item-container-${productId}`);
         productContainer.remove();
-        displayItemValue()
+        displayItemValue();
+        renderPaymentSummary();
     })
 });
 }
@@ -123,7 +124,9 @@ function saveUpdatedItems(){
  
      newUpdate.textContent = +updateInput.value;
      updateQuantity(productId,+updateInput.value);
-     displayItemValue()
+     displayItemValue();
+     renderPaymentSummary();
+     renderOrderSummary();
     }); 
   });
   document.querySelectorAll('.updateField').forEach(updateInput => {
@@ -150,6 +153,7 @@ document.querySelectorAll('.deliveryUpdate').forEach(options => {
     const { productId , deliveryOptionId } = options.dataset;
     updateDeliveryOptions(productId,deliveryOptionId)
     renderOrderSummary();
+    renderPaymentSummary();
   });
 });
 }
