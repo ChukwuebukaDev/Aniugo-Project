@@ -1,6 +1,6 @@
 
  const formatCurrency = (money) => {
 
-    return (money / 100).toFixed(2);
+    return (Math.round(money) / 100).toFixed(2);
 }
 export default formatCurrency;
