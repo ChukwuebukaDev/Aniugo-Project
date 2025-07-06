@@ -1,10 +1,12 @@
-import { cart , removeFromCart , updateCartQuanity , updateQuantity , updateDeliveryOptions } from '../../data/cart.js';
-import getProduct from '../../data/getProduct.js';
+import { cart , removeFromCart , updateCartQuanity , updateQuantity , updateDeliveryOptions } from '../data/cart.js';
+import getProduct from '../data/getProduct.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 import  formatCurrency  from '../utils/moneyFormating.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
+import { deliveryOptions, getDeliveryOption } from '../data/deliveryOptions.js';
 export function renderOrderSummary(){
+  console.log(cart);
+  
 let checkout_rendering = '';
 cart.forEach((item) => {
 const productId = item.productId;

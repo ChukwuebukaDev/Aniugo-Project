@@ -1,5 +1,9 @@
-export let cart = JSON.parse(localStorage.getItem('cart')) ?? [];
+export let cart;
 
+export function loadFromStorage(){
+cart = JSON.parse(localStorage.getItem('cart')) ?? [];
+}
+loadFromStorage()
 export const saveToStorage = () => {
 localStorage.setItem('cart',JSON.stringify(cart));
 }
@@ -56,4 +60,4 @@ export function updateDeliveryOptions (productId,deliveryOptionId){
         });
     matchingItem.deliveryOptionId = deliveryOptionId;
     saveToStorage()
-}
+}  
