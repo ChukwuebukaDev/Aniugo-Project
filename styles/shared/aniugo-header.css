@@ -22,7 +22,11 @@
     width: unset;
   }
 }
-
+@media (max-width: 450px) {
+ .search-bar{
+   display:none;
+ }
+}
 .header-link {
   display: inline-block;
   padding: 6px;
