@@ -23,7 +23,8 @@
   }
 }
 @media (max-width: 450px) {
- .aniugo-header-middle-section{
+ .search-bar,
+ .search-button{
    display:none;
  }
 }
